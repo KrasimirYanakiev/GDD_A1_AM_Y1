@@ -1,12 +1,34 @@
 #include "Engine.h"
+#include "Keys.h"
+#include <bitset>
 
 //Usings
 using namespace glm;
+
+//Global variables
+
+//Phase is the starting position in the sine wave
+//Phase Velocity is how fast the enemy moves through the sine wave
+float enemyPhase[3] = { 0.0f, 0.0f, 0.0f };
+float enemyPhaseVelocity[3] = { radians(45.0f),
+								radians(180.0f),
+								radians(90.0f) };
+
+float playerphase = 0.0f;
+float playerphaseVelocity = radians(1080.0f);
+
+// Storage for the key states
+std::bitset<5> keys{ 0x0 }; //WASD + Space
+
+const float playerSpeed = 5.0f;
+const float playerRotateSpeed = 90.0f; // degrees per second
+
 
 // Function prototypes
 
 void myUpdate(GLFWwindow* window, double tDelta);
 void myKeyboardHandler(GLFWwindow* window, int key, int scancode, int action, int mods);
+
 
 
 int main(void) {
@@ -32,7 +54,7 @@ int main(void) {
 
 	//Adding an player
 	addObject(
-		"player1", 
+		"player", 
 		vec2(-1.5f, 0.0f), 
 		0.0f, 
 		vec2(0.5f, 0.5f), 
@@ -84,24 +106,39 @@ int main(void) {
 	return 0;
 }
 
-//Phase is the starting position in the sine wave
-//Phase Velocity is how fast the enemy moves through the sine wave
-float enemyPhase[3] = { 0.0f, 0.0f, 0.0f };
-float enemyPhaseVelocity[3] = { radians(45.0f),
-								radians(180.0f),
-								radians(90.0f) };
-
-float playerphase = 0.0f;
-float playerphaseVelocity = radians(1080.0f);
+// Function definitions
 
 void myUpdate(GLFWwindow* window, double tDelta)
 {
 	setViewplaneWidth(10.0f);
 
+	GameObject2D* player1 = getObject("player");
+
+	if (keys.test(Key::W) == true)
+	{
+		player1->position.y += playerSpeed * (float)tDelta;
+		//player1->orientation += playerRotateSpeed * (float)tDelta;
+	}
+	else if (keys.test(Key::S) == true)
+	{
+		player1->position.y -= playerSpeed * (float)tDelta;
+		//player1->orientation -= playerRotateSpeed * (float)tDelta;
+	}
+	else if (keys.test(Key::A) == true)
+	{
+		player1->position.x -= playerSpeed * (float)tDelta;
+		//player1->orientation -= playerRotateSpeed * (float)tDelta;
+	}
+	else if (keys.test(Key::D) == true)
+	{
+		player1->position.x += playerSpeed * (float)tDelta;
+		//player1->orientation += playerRotateSpeed * (float)tDelta;
+	}
+
 	//Getting all the enemies
 	GameObjectCollection enemies = getObjectCollection("alien");
 	//Getting the first enemy
-	GameObject2D* enemy1 = enemies.objectArray[0];
+	//GameObject2D* enemy1 = enemies.objectArray[0];
 	//Alternative way
 	//enemies.objectArray[0];
 
@@ -129,11 +166,10 @@ void myUpdate(GLFWwindow* window, double tDelta)
 	}
 
 	//Updating player position on the other axi
-	GameObject2D* player1 = getObject("player1");
+	//player1->position.x = sin(playerphase);
+	//
+	//playerphase += playerphaseVelocity * (float)tDelta;
 
-	player1->position.x = sin(playerphase);
-
-	playerphase += playerphaseVelocity * (float)tDelta;
 
 }
 
@@ -148,16 +184,19 @@ void myKeyboardHandler(GLFWwindow* window, int key, int scancode, int action, in
 			glfwSetWindowShouldClose(window, true);
 			break;
 		case GLFW_KEY_W: //Handle W key press
-			printf("W key pressed\n");
+			keys[Key::W] = true;
 			break;
 		case GLFW_KEY_A: //Handle A key press
-			printf("A key pressed\n");
+			keys[Key::A] = true;
 			break;
 		case GLFW_KEY_S: //Handle S key press
-			printf("S key pressed\n");
+			keys[Key::S] = true;
 			break;
 		case GLFW_KEY_D: //Handle D key press
-			printf("D key pressed\n");
+			keys[Key::D] = true;
+			break;
+		case GLFW_KEY_SPACE: //Handle SPACE key press
+			keys[Key::SPACE] = true;
 			break;
 		}
 		
@@ -166,16 +205,19 @@ void myKeyboardHandler(GLFWwindow* window, int key, int scancode, int action, in
 	{
 		switch(key){
 		case GLFW_KEY_W: //Handle W key release
-			printf("W key released\n");
+			keys[Key::W] = false;
 			break;
 		case GLFW_KEY_A: //Handle A key release
-			printf("A key released\n");
+			keys[Key::A] = false;
 			break;
 		case GLFW_KEY_S: //Handle S key release
-			printf("S key released\n");
+			keys[Key::S] = false;
 			break;
 		case GLFW_KEY_D: //Handle D key release
-			printf("D key released\n");
+			keys[Key::D] = false;
+			break;
+		case GLFW_KEY_SPACE: //Handle SPACE key press
+			keys[Key::SPACE] = false;
 			break;
 		}
 	}
