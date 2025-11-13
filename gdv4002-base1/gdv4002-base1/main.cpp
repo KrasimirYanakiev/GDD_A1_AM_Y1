@@ -22,6 +22,8 @@ float playerphaseVelocity = radians(1080.0f);
 // Storage for the key states
 std::bitset<5> keys{ 0x0 }; //WASD + Space
 
+glm::vec2 gravity = glm::vec2(0.0f, -1.0f); //Gravity vector
+
 const float playerSpeed = 5.0f;
 const float playerRotateSpeed = 90.0f; // degrees per second
 
@@ -37,7 +39,7 @@ int main(void) {
 
 	// Initialise the engine (create window, setup OpenGL backend)
 	int initResult = engineInit("GDV4002 - Applied Maths for Games", 1024, 1024, 5.0f);
-	setViewplaneWidth(10.0f);
+	setViewplaneWidth(10.0f); // 5.0fx5.0f wide viewplane
 
 	// If the engine initialisation failed report error and exit
 	if (initResult != 0) {
