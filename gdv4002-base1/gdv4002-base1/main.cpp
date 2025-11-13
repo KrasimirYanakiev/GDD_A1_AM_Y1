@@ -66,7 +66,7 @@ int main(void) {
 		0.0f, 
 		glm::vec2(0.5f, 0.5f), 
 		playerTexture, 
-		3.0f);
+		0.5f);
 
 	addObject("player", mainPlayer);
 
@@ -101,6 +101,8 @@ int main(void) {
 	addObject("enemy", enemy1);
 	addObject("enemy", enemy2);
 	addObject("enemy", enemy3);
+
+
 
 
 	//
