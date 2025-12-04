@@ -3,7 +3,7 @@
 #include <bitset>
 #include "Player.h"
 #include "Enemy.h"
-
+#include "Emitter.h"
 
 //Usings
 using namespace glm;
@@ -23,7 +23,7 @@ float playerphaseVelocity = radians(1080.0f);
 // Storage for the key states
 std::bitset<5> keys{ 0x0 }; //WASD + Space
 
-glm::vec2 gravity = glm::vec2(0.0f, -1.0f); //Gravity vector
+glm::vec2 gravity = glm::vec2(0.0f, -0.005f); //Gravity vector
 
 const float playerSpeed = 5.0f;
 const float playerRotateSpeed = 90.0f; // degrees per second
@@ -48,6 +48,11 @@ int main(void) {
 		printf("Cannot setup game window!!!\n");
 		return initResult; // exit if setup failed
 	}
+
+	// Fix up OpenGL state for 2D alpha blended textures, no depth testing, pngs with transparency
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glDepthFunc(GL_ALWAYS);
 
 	//Overloaded addObject function signature
 	//GameObject2D* addObject(
@@ -111,6 +116,13 @@ int main(void) {
 	//
 	// Setup game scene objects here
 	//
+
+	Emitter* snowEmitter = new Emitter(
+		glm::vec2(0.0f, getViewplaneHeight() / 2.0f * 1.2f),
+		glm::vec2(getViewplaneWidth() / 2.0f, 0.0f),
+		0.05f);
+
+	addObject("snowEmitter", snowEmitter);
 	
 	//Setting my own update and keyboard handler functions
 	//setUpdateFunction(myUpdate);

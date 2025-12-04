@@ -15,7 +15,7 @@ Emitter::Emitter(glm::vec2 initPosition, glm::vec2 initSize, float emitTimeInter
 
 	for (int i = 0; i < 8; i++)
 	{
-		string path = "Resource\\Textures\\Snow\\snowflake" + to_string(i + 1) + string(".png");
+		string path = "Resources\\Textures\\Snow\\snowflake" + to_string(i + 1) + string(".png");
 		snowflakes[i] = loadTexture(path.c_str());
 
 		if (snowflakes[i] >0)
@@ -70,5 +70,7 @@ void Emitter::update(double tDelta) {
 		}
 
 		particleNumber++;
+
+		addObject(key.c_str(), s1);
 	}
 }
