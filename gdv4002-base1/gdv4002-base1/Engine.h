@@ -1,5 +1,7 @@
 #pragma once
 
+// Engine.h ver 1.2
+
 #include "GraphicsCore.h"
 
 #include "GUMemory.h"
@@ -11,20 +13,23 @@
 #include <math.h>
 #include <iostream>
 #include <string>
+#include <map>
 #include <unordered_map>
+#include <bitset>
 #include <glm/glm.hpp>
 #include "texture_loader.h"
 
 // Define function pointers for render and update functions
 typedef void (*RenderFn)(GLFWwindow* window);
 typedef void (*UpdateFn)(GLFWwindow* window, double tDelta);
+typedef void (*ResizeFn)(GLFWwindow* window, float viewplaneWidth, float viewplaneHeight);
 
 
 // Define new type to store collections of game objects
 struct GameObjectCollection {
 
-	int					objectCount;
-	GameObject2D**		objectArray;
+	int				objectCount;
+	GameObject2D** objectArray;
 
 	// Default constructor - setup empty collection (0, nullptr)
 	GameObjectCollection() {
@@ -78,7 +83,8 @@ void engineShutdown();
 //
 void setKeyboardHandler(GLFWkeyfun newKeyboardHandler);
 void setRenderFunction(RenderFn fn);
-void setUpdateFunction(UpdateFn fn);
+void setUpdateFunction(UpdateFn fn, bool overrideUpdate = true); // if overrideUpdate = true, fn completely replaces the update function in the engine (behaviour of previous version).  If false then fn is called *after* the default update.
+void setResizeFunction(ResizeFn fn);
 
 //
 // Update / Query engine state
@@ -121,6 +127,10 @@ void setViewplaneWidth(float newWidth);
 float getViewplaneWidth();
 float getViewplaneHeight();
 
+glm::vec4 getBackgroundColour();
+void setBackgroundColour(glm::vec4 newColour);
+
+int getObjectCounts(std::string key);
 
 //
 // Test functions
