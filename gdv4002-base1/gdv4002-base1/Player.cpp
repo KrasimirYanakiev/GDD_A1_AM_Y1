@@ -54,12 +54,12 @@ void Player::update(double tDelta) {
 	// Left wall collision
 	if (position.x < -getViewplaneWidth() / 2.0f)
 	{
-		
+		position.x = 0;
 	}
 	// Right wall collision
 	if (position.x > 0)
 	{
-		
+		position.x = -getViewplaneWidth() / 2.0f;
 	}
 	
 	// Calculate acceleration
