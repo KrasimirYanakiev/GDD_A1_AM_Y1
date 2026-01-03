@@ -25,18 +25,22 @@ void Player::update(double tDelta) {
 	if (keys.test(Key::W) == true)
 	{
 		F += glm::vec2(0.0f, thrust);
+		orientation = glm::radians(90.0f);
 	}
 	else if (keys.test(Key::S) == true)
 	{
 		F += glm::vec2(0.0f, -thrust);
+		orientation = glm::radians(270.0f);
 	}
 	if (keys.test(Key::A) == true)
 	{
 		F += glm::vec2(-thrust, 0.0f);
+		orientation = glm::radians(180.0f);
 	}
 	else if (keys.test(Key::D) == true)
 	{
 		F += glm::vec2(thrust, 0.0f);
+		orientation = glm::radians(0.0f);
 	}
 
 	F += gravity;

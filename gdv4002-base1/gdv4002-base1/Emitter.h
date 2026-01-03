@@ -11,7 +11,7 @@ private:
 
 	unsigned long long particleNumber; 
 
-	GLuint snowflakes[8];
+	GLuint asteroids[8];
 
 	// Random number generator
 	std::mt19937 generator;

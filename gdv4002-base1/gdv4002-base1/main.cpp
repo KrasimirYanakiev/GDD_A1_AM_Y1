@@ -117,15 +117,15 @@ int main(void) {
 	// Setup game scene objects here
 	//
 
-	Emitter* snowEmitter = new Emitter(
+	Emitter* asteroidEmitter = new Emitter(
 		glm::vec2(0.0f, getViewplaneHeight() / 2.0f * 1.2f),
 		glm::vec2(getViewplaneWidth() / 2.0f, 0.0f),
-		0.05f);
+		0.5f);
 
-	addObject("snowEmitter", snowEmitter);
+	addObject("asteroidEmitter", asteroidEmitter);
 	
-	//Setting my own update and keyboard handler functions
-	//setUpdateFunction(myUpdate);
+	//Setting my own update and keyboard handler functions, by giving a second variable as false, it only adds to the existing update function, rather than replacing it
+	//setUpdateFunction(deleteAsteroid, false);
 	setKeyboardHandler(myKeyboardHandler);
 
 	// List all game object keys and their count in the engine 
@@ -258,3 +258,16 @@ void myKeyboardHandler(GLFWwindow* window, int key, int scancode, int action, in
 		}
 	}
 }
+
+// Additional update function to delete asteroids that have moved off screen
+//void deleteAsteroid(GLFWwindow* window, double tDelta) {
+//	GameObjectCollection snowflakes = getObjectCollection("Asteroid");
+//
+//	for (int i = 0; i < snowflakes.objectCount; i++) {
+//
+//		if (snowflakes.objectArray[i]->position.y < -(getViewplaneHeight() / 2.0f)) 
+//			deleteObject(snowflakes.objectArray[i]);
+//
+//	}
+//
+//}

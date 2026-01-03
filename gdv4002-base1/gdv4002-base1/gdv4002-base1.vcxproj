@@ -143,7 +143,7 @@ copy "$(SolutionDir)Libs\FreeImage\Wrapper\FreeImagePlus\dist\x64\FreeImagePlus.
     <ClCompile Include="GUObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Snowflake.cpp" />
+    <ClCompile Include="Asteroid.cpp" />
     <ClCompile Include="texture_loader.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -157,7 +157,7 @@ copy "$(SolutionDir)Libs\FreeImage\Wrapper\FreeImagePlus\dist\x64\FreeImagePlus.
     <ClInclude Include="GUObject.h" />
     <ClInclude Include="Keys.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Snowflake.h" />
+    <ClInclude Include="Asteroid.h" />
     <ClInclude Include="texture_loader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
