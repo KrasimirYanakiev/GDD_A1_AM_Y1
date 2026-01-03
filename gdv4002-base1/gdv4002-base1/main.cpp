@@ -33,6 +33,7 @@ const float playerRotateSpeed = 90.0f; // degrees per second
 
 //void myUpdate(GLFWwindow* window, double tDelta);
 void myKeyboardHandler(GLFWwindow* window, int key, int scancode, int action, int mods);
+void deleteBullets(GLFWwindow* window, double tDelta);
 
 
 
@@ -125,7 +126,7 @@ int main(void) {
 	addObject("asteroidEmitter", asteroidEmitter);
 	
 	//Setting my own update and keyboard handler functions, by giving a second variable as false, it only adds to the existing update function, rather than replacing it
-	//setUpdateFunction(deleteAsteroid, false);
+	setUpdateFunction(deleteBullets, false);
 	setKeyboardHandler(myKeyboardHandler);
 
 	// List all game object keys and their count in the engine 
@@ -260,14 +261,17 @@ void myKeyboardHandler(GLFWwindow* window, int key, int scancode, int action, in
 }
 
 // Additional update function to delete asteroids that have moved off screen
-//void deleteAsteroid(GLFWwindow* window, double tDelta) {
-//	GameObjectCollection snowflakes = getObjectCollection("Asteroid");
-//
-//	for (int i = 0; i < snowflakes.objectCount; i++) {
-//
-//		if (snowflakes.objectArray[i]->position.y < -(getViewplaneHeight() / 2.0f)) 
-//			deleteObject(snowflakes.objectArray[i]);
-//
-//	}
-//
-//}
+void deleteBullets(GLFWwindow* window, double tDelta) {
+	GameObjectCollection bulletsCollection = getObjectCollection("bullet");
+
+	// Iterate through all bullets and delete any that are off screen
+	for (int i = 0; i < bulletsCollection.objectCount; i++) {
+
+		if (bulletsCollection.objectArray[i]->position.y < -getViewplaneHeight() ||
+			bulletsCollection.objectArray[i]->position.y > getViewplaneHeight() ||
+			bulletsCollection.objectArray[i]->position.x < -getViewplaneWidth() ||
+			bulletsCollection.objectArray[i]->position.x > getViewplaneWidth())
+			deleteObject(bulletsCollection.objectArray[i]);
+
+	}
+}

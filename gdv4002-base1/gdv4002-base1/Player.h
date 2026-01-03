@@ -9,6 +9,9 @@ private:
 
 	float mass;
 	glm::vec2 velocity;
+	float rechargeTime;
+	float bulletCounter;
+	unsigned long long bulletID = 0;
 
 public:
 
