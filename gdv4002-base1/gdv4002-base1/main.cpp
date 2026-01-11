@@ -84,32 +84,32 @@ int main(void) {
 	GLuint alienTexture =
 		loadTexture("Resources\\Textures\\alien.png");
 
-	Enemy* enemy1 = new Enemy(
-		::vec2(0.0f, 0.0f), 
-		0.0f, 
-		glm::vec2(0.5f, 0.5f), 
-		alienTexture, 0.0f,
-		glm::radians(45.0f));
-
-	Enemy* enemy2 = new Enemy(
-		glm::vec2(1.0f, 0.0f), 
-		0.0f, 
-		glm::vec2(0.5f, 0.5f), 
-		alienTexture, 
-		0.0f, 
-		glm::radians(90.0f));
-
-	Enemy* enemy3 = new Enemy(
-		glm::vec2(2.0f, 0.0f), 
-		0.0f, 
-		glm::vec2(0.5f, 0.5f), 
-		alienTexture, 
-		0.0f, 
-		glm::radians(60.0f));
-
-	addObject("enemy", enemy1);
-	addObject("enemy", enemy2);
-	addObject("enemy", enemy3);
+	//Enemy* enemy1 = new Enemy(
+	//	::vec2(0.0f, 0.0f), 
+	//	0.0f, 
+	//	glm::vec2(0.5f, 0.5f), 
+	//	alienTexture, 0.0f,
+	//	glm::radians(45.0f));
+	//
+	//Enemy* enemy2 = new Enemy(
+	//	glm::vec2(1.0f, 0.0f), 
+	//	0.0f, 
+	//	glm::vec2(0.5f, 0.5f), 
+	//	alienTexture, 
+	//	0.0f, 
+	//	glm::radians(90.0f));
+	//
+	//Enemy* enemy3 = new Enemy(
+	//	glm::vec2(2.0f, 0.0f), 
+	//	0.0f, 
+	//	glm::vec2(0.5f, 0.5f), 
+	//	alienTexture, 
+	//	0.0f, 
+	//	glm::radians(60.0f));
+	//
+	//addObject("enemy", enemy1);
+	//addObject("enemy", enemy2);
+	//addObject("enemy", enemy3);
 
 
 
@@ -272,6 +272,5 @@ void deleteBullets(GLFWwindow* window, double tDelta) {
 			bulletsCollection.objectArray[i]->position.x < -getViewplaneWidth() ||
 			bulletsCollection.objectArray[i]->position.x > getViewplaneWidth())
 			deleteObject(bulletsCollection.objectArray[i]);
-
 	}
 }

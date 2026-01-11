@@ -12,6 +12,8 @@ private:
 	glm::vec2 velocity;
 	// Angle of rotation change per second in radians
 	float angleChangePerSecond;
+	float minVelocity;
+	float maxVelocity;
 
 public:
 	Asteroid(glm::vec2 initPosition, float initOrientation, glm::vec2 initSize, GLuint initTextureID, float mass, float angleChangePerSecond);

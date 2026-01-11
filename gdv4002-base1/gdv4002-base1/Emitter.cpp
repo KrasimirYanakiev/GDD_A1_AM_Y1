@@ -46,7 +46,7 @@ void Emitter::update(double tDelta) {
 
 	emitCounter += (float)tDelta;
 	
-	while (emitCounter >= emitTimeInterval)
+	while (emitCounter >= emitTimeInterval && particleNumber < 30)
 	{
 		// Decrease emitCounter by emitTimeInterval - don't set to 0 as this would ignore the case where multiple particles are needed.
 		emitCounter -= emitTimeInterval;
